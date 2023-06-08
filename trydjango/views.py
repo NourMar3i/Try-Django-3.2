@@ -2,6 +2,7 @@
 To render html web pages
 """
 import random
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from articles.models import Article
@@ -27,5 +28,5 @@ def home_view(request, *args, **kwargs):
     # <h1>{title} (id: {id})!</h1>
     # <p>{content}!</p>
     # """.format(**context)
-    return HttpResponse(HTML_STRING)
-    #return render(request, "home-view.html", context=context)
+   # return HttpResponse(HTML_STRING)
+    return render(request, "home-view.html", context=context)
