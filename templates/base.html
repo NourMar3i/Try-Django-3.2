@@ -5,9 +5,9 @@
     </head>
 
     <body>
-        <button style='margin-top:10px;' type='submit'><a href='/'>Home</a></button>
-        <button style='margin-top:10px;' type='submit'><a href='/articles/create/'>Create</a></button>
-        <button style='margin-top:10px;' type='submit'><a href='/admin/'>Admin</a></button>
+        <button onclick="window.location.href='/';">Home</button>
+        <button onclick="window.location.href='/articles/create/';">Create</button>
+        <button onclick="window.location.href='/articles/list/';">List</button>
         <h1>Search Articles</h1>
         <form action='/articles/' method='GET'>
             <input type='text' name='q' />
