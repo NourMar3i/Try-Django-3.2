@@ -3,18 +3,16 @@
     <head>
 
     </head>
-
     <body>
-        <button style='margin-top:10px;' type='submit'><a href='/'>Home</a></button>
-        <button style='margin-top:10px;' type='submit'><a href='/articles/create/'>Create</a></button>
-        <h1>Search Articles</h1>
+        <h1>Hello World</h1>
         <form action='/articles/' method='GET'>
             <input type='text' name='q' />
-            <button type ='submit'>Search</button>
+            <input type='submit' />
         </form>
 
         {% block content %}
-        <h3>/----0----\</h3>
+        <h3>This will be replaced</h3>
         {% endblock content %}
+
     </body>
 </html>
