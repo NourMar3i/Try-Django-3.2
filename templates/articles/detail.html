@@ -5,6 +5,6 @@
 
 <h1>{{ object.title }}</h1>
 <p>{{ object.content }}</p>
-
+<button style='margin-top:10px;' type='submit'><a href='/articles/{{object.id - 1}}/'>Previous</a></button>
 
 {% endblock content %}
