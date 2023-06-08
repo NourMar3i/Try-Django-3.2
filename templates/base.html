@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html>
-    <head>
+{% extends "base.html" %}
 
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <form action='/articles/' method='GET'>
-            <input type='text' name='q' />
-            <input type='submit' />
-        </form>
+{% block content %}
+<h1>{{ object.title }} (id: {{ id }})!</h1>
+<p>{{ content }}!</p>
 
-        {% block content %}
-        <h3>This will be replaced</h3>
-        {% endblock content %}
+<ul>
+    {% for x in object_list %}
+        {% if x.title %}
+            <li><a href='/articles/{{ x.id }}/'>{{ x.title }} - {{ x.content }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
 
-    </body>
-</html>
+{% endblock content %}
