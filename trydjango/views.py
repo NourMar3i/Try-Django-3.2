@@ -27,5 +27,5 @@ def home_view(request, *args, **kwargs):
     # <h1>{title} (id: {id})!</h1>
     # <p>{content}!</p>
     # """.format(**context)
-    #return HttpResponse(HTML_STRING)
-    return render(request, "home-view.html", context=context)
+    return HttpResponse(HTML_STRING)
+    #return render(request, "home-view.html", context=context)
