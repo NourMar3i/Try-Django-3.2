@@ -1,15 +1,20 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>{{ object.title }} (id: {{ id }})!</h1>
-<p>{{ content }}!</p>
-
+<h2>List of articles:</h2>
 <ul>
-    {% for x in object_list %}
+   {% for x in object_list %}
         {% if x.title %}
-            <li><a href='/articles/{{ x.id }}/'>{{ x.title }} - {{ x.content }}</a></li>
+            <li><a href='/articles/{{x.id}}/'>{{ x.title }} - {{x.content}}</a></li>
         {% endif %}
     {% endfor %}
 </ul>
 
+{% if request.user.is_authenticated %}
+    <p >You are signed in as '{{ request.user }}'.</p>
+    <button onclick="window.location.href='/logout/';">Logout</button>
+{%  else  %}
+    <p>You are not signed in.</p>
+    <button onclick="window.location.href='/login/';">Login</button>
+    <p>Need an account? <button onclick="window.location.href='/register/';">Register</button></p>
+{% endif %}
 {% endblock content %}

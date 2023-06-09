@@ -1,4 +1,4 @@
-"""trydjango URL Configuration
+"""proj URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -14,28 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
-
-from accounts.views import (
-    login_view,
-    logout_view,
-    register_view
-)
-from articles.views import (
-    article_search_view,
-    article_create_view,
-    article_detail_view
-)
+from django.urls import path
+from accounts.views import login_view
+from accounts.views import logout_view
+from accounts.views import register_view
+from articles import views
 from .views import home_view
 
 urlpatterns = [
-    path('', home_view), # index / home / root 
-    path('articles/', article_search_view),
-    path('articles/create/', article_create_view),
-    path('articles/<int:id>/', article_detail_view),
-    # re_path(r'articles/(?P<id>\d+)/$', home_view),
+    path('', home_view ), #index / home / root
+    path('articles/', views.article_search_view),
+    path('articles/create/', views.article_create_view),
+    path('articles/<int:id>/', views.article_detail_view ),
+    path('articles/list/', views.listing ),
     path('admin/', admin.site.urls),
-    path('login/', login_view),
-    path('logout/', logout_view),
-    path('register/', register_view),
+    path('login/',login_view),
+    path('logout/',logout_view),
+    path('register/',register_view),
 ]

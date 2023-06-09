@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-
-from .forms import ArticleForm
+from django.core.paginator import Paginator
+from .forms import ArticleForms
 from .models import Article
 # Create your views here.
 
@@ -24,13 +24,13 @@ def article_search_view(request):
 
 @login_required
 def article_create_view(request):
-    form = ArticleForm(request.POST or None)
+    form = ArticleForms(request.POST or None)
     context = {
         "form": form
     }
     if form.is_valid():
         article_object = form.save()
-        context['form'] = ArticleForm()
+        context['form'] = ArticleForms()
         # context['object'] = article_object
         # context['created'] = True
     return render(request, "articles/create.html", context=context)
@@ -60,3 +60,11 @@ def article_detail_view(request, id=None):
         "object": article_obj,
     }
     return render(request, "articles/detail.html", context=context)
+
+def listing(request):
+    article_list = Article.objects.all().order_by('id')
+    paginator = Paginator(article_list, 3)  # Show 25 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    print("PAGE: ", page_obj)
+    return render(request,"articles/list.html",{"page_obj":page_obj})
