@@ -1,21 +1,128 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
+  <title>TRIAL</title>
 
-    </head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.0" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: navy;
+    }
+    
+    a {
+    color: red;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: red;
+    text-decoration: none;
+  }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px;
+      background-color: gold;
+      box-shadow: 0 0 100px red;
+      border-radius: 8px;
+      border-color: orange;
+    }
+    
+    button {
+      background-color: orange;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      color: white;
+    }
+    
+    button:hover {
+      background-color:red;
+      color: gold;
+    }
+    
+    p {
+      color: blue ;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+    h1 {
+      color: red ;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    form {
+      margin-bottom: 20px;
+    }
+    
+    input[type="text"] {
+      padding: 10px;
+      width: 200px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    
+    button[type="submit"] {
+      background-color: orange;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    button[type="submit"]:hover {
+      background-color: orangered;
+    }
+    
+    h3 {
+      color: red;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    h4 {
+      color: #ff7700;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+  
+  </head>
 
-    <body>
-        <button onclick="window.location.href='/';">Home</button>
-        <button onclick="window.location.href='/articles/create/';">Create</button>
-        <button onclick="window.location.href='/articles/list/';">List</button>
-        <h1>Search Articles</h1>
-        <form action='/articles/' method='GET'>
-            <input type='text' name='q' />
-            <button type ='submit'>Search</button>
-        </form>
+<body>
+  <div class="container">
+    <button onclick="window.location.href='/';">Home</button>
+    <button onclick="window.location.href='/articles/create/';">Create</button>
+    <button onclick="window.location.href='/articles/list/';">List</button>
+    <button onclick="window.location.href='/pdf_view/';">PDF</button>
+    <h1>Search Articles</h1>
+    <form action='/articles/' method='GET'>
+      <input type='text' name='q' />
+      <button type ='submit'>Search</button>
+    </form>
 
-        {% block content %}
-        <h3>/----0----\</h3>
-        {% endblock content %}
-    </body>
+    {% block content %}
+    <h3>/----0----\</h3>
+    {% endblock content %}
+  </div>
+
+  {% block page_specific_script %}{% endblock %}
+</body>
 </html>

@@ -1,24 +1,125 @@
 {% extends "base.html" %}
 {% block content %}
+<h3>Articles per page: </h3>
+{% comment %} <span class="current">
+    <form method="GET">
+        <select onchange="window.location.href='?page_size='+event.target.value" name="page_size">
+            <option hrefhref="?paginate_by=1&{{paginate_parameter}}">1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </form>
+</span> {% endcomment %}
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Paginate By {{ request.GET.paginate_by }}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="?paginate_by=2&{{paginate_parameter}}">2</a>
+      <a class="dropdown-item" href="?paginate_by=3&{{paginate_parameter}}">3</a>
+      <a class="dropdown-item" href="?paginate_by=4&{{paginate_parameter}}">4</a>
+    </div>
+</div>
+{% comment %} <form method='GET'>
+    <input type='text' name='q' />
+    <button type ='submit'>Search</button>
+  </form> {% endcomment %}
 {% for article in page_obj %}
 <h1><a href='/articles/{{article.id}}/'>{{article.id}}. {{ article.title | upper }}</a><br><h1>
 {% endfor %}
 
-<div class="pagination">
+{% comment %} <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
             <button onclick="window.location.href='?page=1';">&laquo;&laquo;</button>
             <button onclick="window.location.href='?page={{ page_obj.previous_page_number}}';">Prev</button>
         {% endif %}
+        
+        {% for p in paginator.page_range %}
+            {% if p == page_obj.number  %}
+            <span class="current">
+                <a style="color:orangered"> {{p}} </a>
+            </span>
+            {%else%}
+            <span class="current">
+                <a href='?page={{p}}'> {{p}} </a>
+            </span>
+            {%endif%}
+        {% endfor %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+
         
         {% if page_obj.has_next %}
             <button onclick="window.location.href='?page={{ page_obj.next_page_number }}';">Next</button>
             <button onclick="window.location.href='?page={{ page_obj.paginator.num_pages }}';">&raquo;&raquo;</button>
         {% endif %}
     </span>
+    <p>
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </p>
+</div> {% endcomment %}
+<nav aria-label="...">
+    <ul class="pagination flex-wrap justify-content-center">
+      <li class="page-item disabled">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}&{{page_parameter}}">⇇</a>
+          </li>
+        {% endif %}
+        {% if page_obj.number > 3 %}
+          <li class="page-item">
+            <a class="page-link" href="{{ request.path }}?page=1&{{page_parameter}}">1</a>
+          </li>
+        {% endif %}
+        {% if page_obj.number > 4 %}
+            <li class="page-item">
+            <span class="page-link">....</span>
+            </li>
+        {% endif %}
+      </li>
+
+      {% for i in page_obj.paginator.page_range %}
+        {% if page_obj.number == i %}
+          <li class="page-item active">
+            <span class="page-link">
+              {{ i }}
+              <span class="sr-only"></span>
+            </span>
+          </li>
+          {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+            <li class="page-item">
+              <a class="page-link" href="{{ request.path }}?page={{ i }}&{{page_parameter}}">{{ i }}</a>
+            </li>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        {% if page_obj.number < page_obj.paginator.num_pages|add:'-3' %}
+            <li class="page-item">
+                <span class="page-link">....</span>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&{{page_parameter}}">{{ page_obj.paginator.num_pages }}</a>
+            </li>
+        {% elif page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&{{page_parameter}}">{{ page_obj.paginator.num_pages }}</a>
+            </li>
+        {% endif %}  
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}&{{page_parameter}}"> ⇉</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+  <!-- pagination end -->
 </div>
+
 {% endblock content %}
+
+{% block page_specific_script %}
+
+{% endblock %}
