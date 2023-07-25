@@ -18,8 +18,8 @@ from django.core.files.base import ContentFile
 from rest_framework import generics,viewsets,permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import Location, Item
-from .serializers import LocationSerializer, ItemSerializer, ArticleSerializer
+# from .models import Location, Item
+from .serializers import ArticleSerializer
 
 
 # Create your views here.
@@ -171,23 +171,23 @@ class ViewPDF(DetailView):
         pdf =render_to_pdf('pdf_view.html',data)
         return HttpResponse(pdf,content_type='application/pdf')
     
-class ItemList(generics.ListCreateAPIView):
-    serializer_class = ItemSerializer
+# class ItemList(generics.ListCreateAPIView):
+#     serializer_class = ItemSerializer
 
-    def get_queryset(self):
-        queryset = Item.objects.all()
-        location = self.request.query_params.get('location')
-        if location is not None:
-            queryset = queryset.filter(location=location)
-        return queryset
+#     def get_queryset(self):
+#         queryset = Item.objects.all()
+#         location = self.request.query_params.get('location')
+#         if location is not None:
+#             queryset = queryset.filter(location=location)
+#         return queryset
 
-class ArticleList(generics.ListCreateAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+# class ArticleList(generics.ListCreateAPIView):
+#     queryset = Article.objects.all()
+#     serializer_class = ArticleSerializer
 
-class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+# class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Article.objects.all()
+#     serializer_class = ArticleSerializer
 
 class ArticleDD(viewsets.ModelViewSet):
     queryset = Article.objects.all()
@@ -199,16 +199,16 @@ class ArticleDD(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
+# class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Item.objects.all()
+#     serializer_class = ItemSerializer
 
 
-class LocationList(generics.ListCreateAPIView):
-    queryset = Location.objects.all()
-    serializer_class = LocationSerializer
+# class LocationList(generics.ListCreateAPIView):
+#     queryset = Location.objects.all()
+#     serializer_class = LocationSerializer
 
 
-class LocationDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Location.objects.all()
-    serializer_class = LocationSerializer
+# class LocationDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Location.objects.all()
+#     serializer_class = LocationSerializer

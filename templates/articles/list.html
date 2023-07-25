@@ -31,36 +31,6 @@
 <h1><a href='/articles/{{article.id}}/'>{{article.id}}. {{ article.title | upper }}</a><br><h1>
 {% endfor %}
 
-{% comment %} <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <button onclick="window.location.href='?page=1';">&laquo;&laquo;</button>
-            <button onclick="window.location.href='?page={{ page_obj.previous_page_number}}';">Prev</button>
-        {% endif %}
-        
-        {% for p in paginator.page_range %}
-            {% if p == page_obj.number  %}
-            <span class="current">
-                <a style="color:orangered"> {{p}} </a>
-            </span>
-            {%else%}
-            <span class="current">
-                <a href='?page={{p}}'> {{p}} </a>
-            </span>
-            {%endif%}
-        {% endfor %}
-
-
-        
-        {% if page_obj.has_next %}
-            <button onclick="window.location.href='?page={{ page_obj.next_page_number }}';">Next</button>
-            <button onclick="window.location.href='?page={{ page_obj.paginator.num_pages }}';">&raquo;&raquo;</button>
-        {% endif %}
-    </span>
-    <p>
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-    </p>
-</div> {% endcomment %}
 <nav aria-label="...">
     <ul class="pagination flex-wrap justify-content-center">
       <li class="page-item disabled">

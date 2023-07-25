@@ -1,4 +1,4 @@
-#!C:\Users\noure\trial\try-django-3.2\Scripts\python.exe
+#!C:\Users\noure\test1\Try-Django-3.2\Scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
